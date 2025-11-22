@@ -28,11 +28,11 @@ namespace DVLD_Buisness
                 if (user == null) // If no user is not found, 
                 {
                     
-                    // record the -LOG- error message iNTO  file for tracking failed login attempts.”
+                    
                     fileLogger.log("Failed login: username not found") ;
                     return new clsLogIn("Wrong Email Or Password", false); // Returns a friendly message to the UI
                 }
-                // If the user is found but their account is not active , I also stop the process.
+         .
                 if (!user.IsActive)
                 {// record the error message in a log file for tracking inactive account login attempts for security.”.”
                     fileLogger.log($"Inactive account login attempt for '{txtUserName}'");
@@ -44,7 +44,7 @@ namespace DVLD_Buisness
                 bool found = clsCryptoService.VerifyPassword(NewHashedPassword, user.PasswordHash);
                 if (!found)
                 {
-                   // we can log , and in here we returned freindly error message to the  file 
+      
                     return new clsLogIn($"Failed login: wrong password for '{txtUserName}'", false);
                 }
                 else
@@ -54,7 +54,7 @@ namespace DVLD_Buisness
                     //symmetric encryption
                     string encryptedPassword = clsCryptoService.Encrypt(txtPassword);
 
-                    //      I encrypt the password and store it securely in Windows Credential Manager.. in web/mob app use token
+                    //  in web/mob app use token
                     var cred = new CredentialManagement.Credential
                     {
                         Target = "MyDMV_RememberMe",
@@ -67,7 +67,7 @@ namespace DVLD_Buisness
                 }
                 else
                 {
-                    // If unchecked, I remove any previously stored credentials. from Windows Credential Manager,
+                  
                     var oldCred = new CredentialManagement.Credential { Target = "MyDMV_RememberMe" };
                     oldCred.Delete();
                 }
